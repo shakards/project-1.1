@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Loader Tutorial - W3Schools Style</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Source Sans Pro', sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+      color: #04AA6D;
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 700;
+    }
+
+    h2 {
+      margin-top: 30px;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 15px 0;
+    }
+
+    code {
+      background: #f4f4f4;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: Consolas, "Courier New", monospace;
+    }
+
+    .loader-demo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+      background: #1e1e1e;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+
+    /* Loader Styles */
+    .loader {
+      --R: 60px; /* Size of the loader */
+      --g1: #514b82 96%, #0000; /* Gradient color 1 */
+      --g2: #eeeeee 96%, #0000; /* Gradient color 2 */
+      width: calc(2 * var(--R));
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      -webkit-mask: linear-gradient(#000 0 0);
+      animation: l30 2s infinite linear;
+    }
+
+    .loader::before,
+    .loader::after {
+      content: "";
+      grid-area: 1/1;
+      width: 50%;
+      background:
+        radial-gradient(farthest-side, var(--g1)) calc(var(--R) + 0.866 * var(--R) - var(--R)) calc(var(--R) - 0.5 * var(--R) - var(--R)),
+        radial-gradient(farthest-side, var(--g1)) calc(var(--R) + 0.866 * var(--R) - var(--R)) calc(var(--R) - 0.5 * var(--R) - var(--R)),
+        radial-gradient(farthest-side, var(--g2)) calc(var(--R) + 0.5 * var(--R) - var(--R)) calc(var(--R) - 0.866 * var(--R) - var(--R)),
+        radial-gradient(farthest-side, var(--g1)) 0 calc(-1 * var(--R)),
+        radial-gradient(farthest-side, var(--g2)) calc(var(--R) - 0.5 * var(--R) - var(--R)) calc(var(--R) - 0.866 * var(--R) - var(--R)),
+        radial-gradient(farthest-side, var(--g1)) calc(var(--R) - 0.866 * var(--R) - var(--R)) calc(var(--R) - 0.5 * var(--R) - var(--R)),
+        radial-gradient(farthest-side, var(--g2)) calc(-1 * var(--R)) 0,
+        radial-gradient(farthest-side, var(--g1)) calc(var(--R) - 0.866 * var(--R) - var(--R)) calc(var(--R) + 0.5 * var(--R) - var(--R));
+      background-size: calc(2 * var(--R)) calc(2 * var(--R));
+      background-repeat: no-repeat;
+    }
+
+    .loader::after {
+      transform: rotate(180deg);
+      transform-origin: right;
+    }
+
+    @keyframes l30 {
+      100% { transform: rotate(-1turn); }
+    }
+
+    /* Code Block Styling */
+    .code-block {
+      background: #E7E9EB;
+      color: #000;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      margin: 20px 0;
+      border-left: 4px solid #04AA6D;
+    }
+
+    .code-block code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 15px;
+      background: transparent;
+      white-space: pre;
+    }
+
+    /* W3Schools-style Editor */
+    .editor-container {
+      background: #ffffff;
+      border: 1px solid #d4d4d4;
+      border-radius: 5px;
+      margin: 20px 0;
+      overflow: hidden;
+    }
+
+    .editor-header {
+      background: #04AA6D;
+      color: white;
+      padding: 10px 15px;
+      font-weight: 600;
+    }
+
+    .editor-body {
+      position: relative;
+    }
+
+    #code-editor {
+      width: 100%;
+      height: 300px;
+      padding: 15px;
+      border: none;
+      border-bottom: 1px solid #d4d4d4;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 15px;
+      line-height: 1.5;
+      resize: vertical;
+      tab-size: 4;
+      outline: none;
+    }
+
+    .editor-footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 15px;
+      background: #f1f1f1;
+    }
+
+    .editor-button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      background: #04AA6D;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .editor-button:hover {
+      background: #059862;
+    }
+
+    #result {
+      width: 100%;
+      height: 300px;
+      border: none;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Title and Introduction -->
+    <h1>CSS Loader Tutorial</h1>
+    <p>
+      In this tutorial, you'll learn how to create a stylish CSS loader using pure CSS. This loader is perfect for indicating loading states in your web applications.
+    </p>
+
+    <!-- Live Demo -->
+    <h2>Live Demo</h2>
+    <div class="loader-demo">
+      <div class="loader"></div>
+    </div>
+
+    <!-- Code Explanation -->
+    <h2>Code Explanation</h2>
+    <p>
+      The loader is created using a combination of CSS variables, gradients, and animations. Here's a breakdown of the code:
+    </p>
+    <ol>
+      <li>
+        <strong>CSS Variables</strong>: The loader uses CSS variables (<code>--R</code>, <code>--g1</code>, and <code>--g2</code>) to define its size and colors.
+      </li>
+      <li>
+        <strong>Gradients</strong>: The loader uses multiple <code>radial-gradient</code> backgrounds to create its unique design.
+      </li>
+      <li>
+        <strong>Animation</strong>: The loader spins continuously using a CSS animation (<code>@keyframes</code>).
+      </li>
+    </ol>
+
+    <!-- Full Code -->
+    <h2>Full Code</h2>
+    <div class="code-block">
+      <code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;CSS Loader&lt;/title&gt;
+  &lt;style&gt;
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #1e1e1e;
+    }
+    .loader {
+      --R: 60px;
+      --g1: #514b82 96%, #0000;
+      --g2: #eeeeee 96%, #0000;
+      width: calc(2 * var(--R));
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      -webkit-mask: linear-gradient(#000 0 0);
+      animation: l30 2s infinite linear;
+    }
+    /* ... rest of the CSS ... */
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div class="loader"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+      </code>
+    </div>
+
+    <!-- Try It Yourself - W3Schools Style -->
+    <h2>Try It Yourself</h2>
+    <div class="editor-container">
+      <div class="editor-header">
+        Edit the code and click "Run" to see the result
+      </div>
+      <div class="editor-body">
+        <textarea id="code-editor" spellcheck="false">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Loader</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #1e1e1e;
+    }
+    .loader {
+      --R: 60px;
+      --g1: #514b82 96%, #0000;
+      --g2: #eeeeee 96%, #0000;
+      width: calc(2 * var(--R));
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      -webkit-mask: linear-gradient(#000 0 0);
+      animation: l30 2s infinite linear;
+    }
+    .loader::before,
+    .loader::after {
+      content: "";
+      grid-area: 1/1;
+      width: 50%;
+      background:
+        radial-gradient(farthest-side, var(--g1)) calc(var(--R) + 0.866 * var(--R) - var(--R)) calc(var(--R) - 0.5 * var(--R) - var(--R)),
+        radial-gradient(farthest-side, var(--g1)) calc(var(--R) + 0.866 * var(--R) - var(--R)) calc(var(--R) - 0.5 * var(--R) - var(--R)),
+        radial-gradient(farthest-side, var(--g2)) calc(var(--R) + 0.5 * var(--R) - var(--R)) calc(var(--R) - 0.866 * var(--R) - var(--R)),
+        radial-gradient(farthest-side, var(--g1)) 0 calc(-1 * var(--R)),
+        radial-gradient(farthest-side, var(--g2)) calc(var(--R) - 0.5 * var(--R) - var(--R)) calc(var(--R) - 0.866 * var(--R) - var(--R)),
+        radial-gradient(farthest-side, var(--g1)) calc(var(--R) - 0.866 * var(--R) - var(--R)) calc(var(--R) - 0.5 * var(--R) - var(--R)),
+        radial-gradient(farthest-side, var(--g2)) calc(-1 * var(--R)) 0,
+        radial-gradient(farthest-side, var(--g1)) calc(var(--R) - 0.866 * var(--R) - var(--R)) calc(var(--R) + 0.5 * var(--R) - var(--R));
+      background-size: calc(2 * var(--R)) calc(2 * var(--R));
+      background-repeat: no-repeat;
+    }
+    .loader::after {
+      transform: rotate(180deg);
+      transform-origin: right;
+    }
+    @keyframes l30 {
+      100% { transform: rotate(-1turn); }
+    }
+  </style>
+</head>
+<body>
+  <div class="loader"></div>
+</body>
+</html>
+        </textarea>
+      </div>
+      <div class="editor-footer">
+        <button class="editor-button" onclick="runCode()">Run »</button>
+      </div>
+      <div class="editor-header">
+        Result
+      </div>
+      <iframe id="result"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // Function to run the code in the iframe
+    function runCode() {
+      const code = document.getElementById('code-editor').value;
+      const iframe = document.getElementById('result');
+      iframe.srcdoc = code;
+    }
+    
+    // Run the code initially
+    window.onload = runCode;
+  </script>
+</body>
+</html>
